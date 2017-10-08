@@ -44,3 +44,5 @@ locale.currency(gesamtbetrag)
 print('Der jaehrlich faellige Zinsbetrag betraegt ' +  locale.currency(jahreszinsen, True, True, True))
 print('Die Gesamtzinsen betragen ' + locale.currency(gesamtzinsen,True,True,True))
 print('Insgesamt sind '+ locale.currency(gesamtbetrag,True,True,True)+' zu zahlen!')
+
+"""Dies ist eine Aenderung"""
