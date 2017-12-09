@@ -17,27 +17,35 @@ loanAmount=Decimal(0)
 rateOfInterest=Decimal(0)
 runTime=Decimal(0)
 
-"control user"
-while loanAmount != Decimal or loanAmount <= 0:
+"check values"
+while True:
     try:
-        loanAmount = Decimal(input("Bitte geben sie den Darlehensbetrag in Euro ein:"))
+        loanAmount=raw_input("Bitte geben Sie den Darlehensbetrag in Euro ein:")
+        loanAmount=Decimal(loanAmount)
+        if loanAmount <= 0:
+            raise ValueError
         break
-    except:
-        print("Bitte geben Sie einen Zahlenwert groeßer 0 ein!")
-
-while rateOfInterest != Decimal or rateOfInterest <= 0:
+    except :
+        print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
+while True:
     try:
-        rateOfInterest = Decimal(input("Bitte geben Sie den Zinssatz in Prozent ein:") * 0.01)
+        rateOfInterest=raw_input("Bitte geben Sie den Zinssatz in Prozent ein:")
+        rateOfInterest=Decimal(rateOfInterest)*Decimal(0.01)
+        "rateOfInterest=rateOfInterest*0.01"
+        if rateOfInterest <= 0:
+            raise ValueError
         break
-    except:
-        print("Bitte geben Sie einen Zahlenwert groeßer 0 ein!")
-
-while runTime != Decimal or runTime <= 0:
+    except :
+        print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
+while True:
     try:
-        runTime = Decimal(input("Bitte geben Sie die Laufzeit in Jahren ein:"))
+        runTime=raw_input("Bitte geben Sie die Laufzeit in Jahren ein:")
+        runTime=Decimal(runTime)
+        if runTime<=0:
+            raise ValueError
         break
-    except:
-        print("Bitte geben Sie einen Zahlenwert groeßer 0 ein!")
+    except :
+        print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
 
 
 
