@@ -1,22 +1,30 @@
-#!/usr/bin/env phython
-# coding: utf8
+#!/usr/local/bin/python
+# coding: utf-8
+
+"""
+program: determine the annuity
+author: Jan Kasper
+"""
+
 from decimal import *
 import locale
+import time
+import math
 
-"info and greetings"
-x=''.center(80, '*')+"\n"+  (' '*76).center(80, '*')+"\n"+'Annuitaetisches Darlehen'.center(76,' ').center(80, '*')\
-+"\n"+'Version 0.1 vom 23.11.2017'.center(76,' ').center(80, '*')+"\n"+'Fehler bitte an itf17a@tbs1.de'.center(76,' ').center(80, '*')\
-+"\n"+(' '*76).center(80, '*')+"\n"+''.center(80, '*')
+""" version info and greeting"""
+__infoWidth__ = 80
+__version__ = '0.2'
+__author__ = 'Jan Kasper'
+
+x = ''.center(80, '*') + "\n" + (' '*76).center(80, '*') + "\n" + \
+    'Annuitätisches Darlehen'.center(76, ' ').center(80, '*')\
+    + "\n" + (__version__ + ' vom ' + (time.strftime("%d.%m.%y"))).center(76, ' ').center(80, '*')\
+    + "\n" + 'Fehler bitte an jankasper@students.tbs1.de'.center(76, ' ').center(80, '*')\
+    + "\n" + (' '*76).center(80, '*')+"\n"+''.center(80, '*')
 print(x)
 
-"localization and formatting"
-locale.setlocale(locale.LC_ALL,'de_DE')
-
-"initialize variables"
-loanAmount=Decimal(0)
-rateOfInterest=Decimal(0)
-runTime=Decimal(0)
-
+locale.setlocale(locale.LC_ALL, 'german')
+"""
 "check values"
 while True:
     try:
@@ -50,12 +58,12 @@ while True:
 
 
 """" determing the annuity"""
-
+"""
 annuity=Decimal(loanAmount*(((1+rateOfInterest)**runTime)*rateOfInterest/(((1+rateOfInterest)**runTime)-1)))
 sumOfInterest=Decimal((annuity*runTime)-loanAmount)
 
 print(locale.currency(annuity,True,True,True))
 print(locale.currency(sumOfInterest,True,True,True))
 
-
+"""
 
