@@ -24,46 +24,94 @@ x = ''.center(80, '*') + "\n" + (' '*76).center(80, '*') + "\n" + \
 print(x)
 
 locale.setlocale(locale.LC_ALL, 'german')
-"""
-"check values"
+
 while True:
-    try:
-        loanAmount=raw_input("Bitte geben Sie den Darlehensbetrag in Euro ein:")
-        loanAmount=Decimal(loanAmount)
-        if loanAmount <= 0:
-            raise ValueError
+
+    "inputs & check"
+    while True:
+        try:
+            loanAmount = input("Bitte geben Sie den Darlehensbetrag in Euro ein:")
+            loanAmount = Decimal(loanAmount)
+            if loanAmount <= 0:
+                raise ValueError
+            break
+        except InvalidOperation:
+            print("Achtung! Bitte geben Sie eine Zahl ein!")
+        except ValueError:
+            print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
+    while True:
+        try:
+            rateOfInterest = input("Bitte geben Sie den Zinssatz in Prozent ein:")
+            rateOfInterest = Decimal(rateOfInterest) * Decimal(0.01)
+            if rateOfInterest <= 0:
+                raise ValueError
+            break
+        except InvalidOperation:
+            print("Achtung! Bitte geben Sie eine Zahl ein!")
+        except ValueError:
+            print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
+    while True:
+        try:
+            runTime = input("Bitte geben Sie die Laufzeit in Jahren ein:")
+            runTime = Decimal(runTime)
+            if runTime <= 0:
+                raise ValueError
+            break
+        except InvalidOperation:
+            print("Achtung! Bitte geben Sie eine Zahl ein!")
+        except ValueError:
+            print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
+
+    """determine the annuity"""
+    annuity = Decimal(loanAmount*(((1+rateOfInterest)**runTime)*rateOfInterest/(((1+rateOfInterest)**runTime)-1)))
+    sumOfInterest = Decimal((annuity*runTime)-loanAmount)
+    print("Die jährliche Annuität beträgt: " + locale.currency(annuity,True,True,True))
+    print("Die Gesamtzinsen betragen: " + locale.currency(sumOfInterest,True,True,True))
+
+    """Berechnung der Jahreswerte"""
+
+    partInterestYear1 = loanAmount * rateOfInterest
+    partRepaymentYear1 = annuity - partInterestYear1
+    print(''.center(80, '*'))
+    print("Anteile im Jahr: 1")
+    print("Zinsanteil im Jahr 1: " + locale.currency(partInterestYear1, True, True, True))
+    print("Tilgunsanteil im Jahr 1: " + locale.currency(partRepaymentYear1, True, True, True))
+    tempYear = 2
+    while tempYear <= math.ceil(runTime):
+        partRepaymentYear = partRepaymentYear1 * (1 + rateOfInterest) ** (tempYear - 1)
+        partInterestYear = annuity - partRepaymentYear
+        print(''.center(80, '*'))
+        print("Anteile im Jahr: " + str(tempYear))
+        print("Zinsanteil im Jahr " + str(tempYear) + ": " + locale.currency(partInterestYear, True, True, True))
+        print("Tilgunsanteil im Jahr " + str(tempYear) + ": " + locale.currency(partRepaymentYear, True, True, True))
+        tempYear += 1
+
+    print(''.center(80, '*'))
+    print("Die Berechnung ist fertig!")
+    print(''.center(80, '*'))
+
+    """new run?"""
+    newRun = False
+    while True:
+        try:
+            choose = input("Möchten Sie ein neues Darlehen berechnen?(y/n)")
+            if choose == "n":
+                break
+            elif choose == "y":
+                newRun = True
+                break
+            else:
+                raise ValueError
+        except ValueError:
+            print("Bitte wählen Sie eine Entscheidung! y=Ja, n=Nein")
+
+    if newRun is False:
         break
-    except :
-        print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
-while True:
-    try:
-        rateOfInterest=raw_input("Bitte geben Sie den Zinssatz in Prozent ein:")
-        rateOfInterest=Decimal(rateOfInterest)*Decimal(0.01)
-        "rateOfInterest=rateOfInterest*0.01"
-        if rateOfInterest <= 0:
-            raise ValueError
-        break
-    except :
-        print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
-while True:
-    try:
-        runTime=raw_input("Bitte geben Sie die Laufzeit in Jahren ein:")
-        runTime=Decimal(runTime)
-        if runTime<=0:
-            raise ValueError
-        break
-    except :
-        print("Achtung! Bitte geben Sie eine Zahl grösser 0 ein !")
+print("Das Programm beendet sich!")
 
 
 
-"""" determing the annuity"""
-"""
-annuity=Decimal(loanAmount*(((1+rateOfInterest)**runTime)*rateOfInterest/(((1+rateOfInterest)**runTime)-1)))
-sumOfInterest=Decimal((annuity*runTime)-loanAmount)
 
-print(locale.currency(annuity,True,True,True))
-print(locale.currency(sumOfInterest,True,True,True))
 
-"""
+
 
