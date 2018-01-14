@@ -6,7 +6,7 @@ x=''.center(80, '*')+"\n"+  (' '*76).center(80, '*')+"\n"+'Willkommen zum Darleh
 +"\n"+(' '*76).center(80, '*')+"\n"+''.center(80, '*')
 print(x)
 
-locale.setlocale(locale.LC_ALL,'de_DE')
+locale.setlocale(locale.LC_ALL,'')
 
 db = Decimal(input("Bitte geben sie den Darlehensbetrag ein?"))
 zins = Decimal(input("Bitte geben sie den Zinssatz an?")*0.01)
