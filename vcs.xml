@@ -10,6 +10,10 @@
           <option name="url" value="https://github.com/JKasper89/LogSim.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/JKasper89/Vererbung-Logikgatter.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\kjgam\PycharmProjects" />
